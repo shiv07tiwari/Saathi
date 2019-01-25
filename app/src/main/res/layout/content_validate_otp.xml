@@ -45,7 +45,8 @@
                 android:layout_height="80dp">
                 <EditText
                     android:layout_width="80dp"
-                    android:inputType="numberPassword"
+                    android:id="@+id/editText1"
+                    android:inputType="number"
                     android:textAlignment="center"
                     android:textSize="40sp"
                     android:hint="1"
@@ -57,7 +58,8 @@
                 android:layout_height="80dp">
                 <EditText
                     android:layout_width="80dp"
-                    android:inputType="numberPassword"
+                    android:id="@+id/editText2"
+                    android:inputType="number"
                     android:textSize="40sp"
                     android:hint="1"
                     android:textAlignment="center"
@@ -69,7 +71,8 @@
                 android:layout_height="80dp">
                 <EditText
                     android:layout_width="80dp"
-                    android:inputType="numberPassword"
+                    android:id="@+id/editText3"
+                    android:inputType="number"
                     android:textSize="40sp"
                     android:hint="1"
                     android:textAlignment="center"
@@ -91,7 +94,8 @@
                 android:layout_height="80dp">
                 <EditText
                     android:layout_width="80dp"
-                    android:inputType="numberPassword"
+                    android:id="@+id/editText4"
+                    android:inputType="number"
                     android:textSize="40sp"
                     android:hint="1"
                     android:textAlignment="center"
@@ -103,7 +107,8 @@
                 android:layout_height="80dp">
                 <EditText
                     android:layout_width="80dp"
-                    android:inputType="numberPassword"
+                    android:id="@+id/editText5"
+                    android:inputType="number"
                     android:textSize="40sp"
                     android:hint="1"
                     android:textAlignment="center"
@@ -115,7 +120,8 @@
                 android:layout_height="80dp">
                 <EditText
                     android:layout_width="80dp"
-                    android:inputType="numberPassword"
+                    android:id="@+id/editText6"
+                    android:inputType="number"
                     android:textSize="40sp"
                     android:hint="1"
                     android:textAlignment="center"

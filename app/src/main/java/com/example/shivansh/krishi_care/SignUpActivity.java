@@ -12,7 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.List;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -28,8 +34,38 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+//        RetrofitInterface apiService =
+//                APIClient.getClient().create(RetrofitInterface.class);
+//        Call<List<OTPMessageResponse>> call = apiService.check();
+//
+//        call.enqueue(new Callback<List<OTPMessageResponse>>() {
+//
+//            @Override
+//            public void onResponse(Call<List<OTPMessageResponse>> call, Response<List<OTPMessageResponse>> response) {
+//                Log.e("log", call.request().url().toString());
+//                try {
+//                    Log.e("log","Check");
+//                    //Toast.makeText(SignUpActivity.this,String.valueOf(response.message()),Toast.LENGTH_LONG).show();
+//                   // Log.e("Log", String.valueOf(response.body()));
+//                    List<OTPMessageResponse> list = response.body();
+//                    for (OTPMessageResponse m: list) {
+//                        Log.e("log",m.getName());
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<OTPMessageResponse>> call, Throwable t) {
+//                Log.e("log", call.request().url().toString());
+//                Toast.makeText(SignUpActivity.this,String.valueOf(t),Toast.LENGTH_LONG).show();
+//                Log.e("ERROR2", t.toString());
+//            }
+//
+//        });
+
         upload_image = findViewById(R.id.upload_image);
-        final EditText user_aadhar = findViewById(R.id.user_aadhar);
         final EditText user_name = findViewById(R.id.user_name);
         final EditText user_phone = findViewById(R.id.user_contact);
         final EditText user_email = findViewById(R.id.user_email);
@@ -39,10 +75,6 @@ public class SignUpActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.e("log","Click");
-                if(!validateAadharNumber(user_aadhar.getText().toString())) {
-                    //valid=false;
-                    Toast.makeText(SignUpActivity.this,"Inavlid Aadhar Card",Toast.LENGTH_LONG).show();
-                }
                 if(user_name.getText().toString().length()==0 && valid) {
                     //valid=false;
                     Toast.makeText(SignUpActivity.this, "Enter Name", Toast.LENGTH_LONG).show();
@@ -66,7 +98,6 @@ public class SignUpActivity extends AppCompatActivity {
                     SignUpActivity.this.startActivity(myIntent);
                     //Utilities.requestOTP(user_phone);
                     editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                    editor.putString("user_aadhar",user_aadhar.getText().toString());
                     editor.putString("user_name",user_name.getText().toString());
                     editor.putString("user_phone",user_phone.getText().toString());
                     editor.putString("user_email",user_email.getText().toString());
@@ -102,6 +133,7 @@ public class SignUpActivity extends AppCompatActivity {
             Uri selectedImageUri = data.getData();
             editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
             Log.e("log","Editor : "+editor);
+            Log.e("log", String.valueOf(selectedImageUri));
             editor.putString("user_image_uri", String.valueOf(selectedImageUri));
             editor.apply();
             upload_image.setImageURI(selectedImageUri);

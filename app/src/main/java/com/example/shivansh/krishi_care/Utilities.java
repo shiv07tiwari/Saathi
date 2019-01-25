@@ -2,8 +2,15 @@ package com.example.shivansh.krishi_care;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.EditText;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,54 +69,93 @@ public class Utilities {
         return reversed;
     }
 
-    public static void requestOTP(EditText mobileNumber) {
+//    public static void requestOTP(EditText mobileNumber) {
+//
+//        Log.e("log","Request");
+//        RetrofitInterface apiService =
+//                APIClient.getClient().create(RetrofitInterface.class);
+//        Call<OTPMessageResponse> call = apiService.sentOTP(mobileNumber.getText().toString());
+//        call.enqueue(new Callback<OTPMessageResponse>() {
+//            @Override
+//            public void onResponse(Call<OTPMessageResponse> call, Response<OTPMessageResponse> response) {
+//                Log.e("log", call.request().url().toString());
+//                sessionId = response.body().getDetails();
+//                Log.e("SenderID", sessionId);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<OTPMessageResponse> call, Throwable t) {
+//                Log.e("ERROR1", t.toString());
+//            }
+//        });
+//    }
+//    public static void validateOTP(String otpAuto, final Context context) {
+//        RetrofitInterface apiService =
+//                APIClient.getClient().create(RetrofitInterface.class);
+//
+//        Call<OTPMessageResponse> call = apiService.verifyOTP(sessionId, otpAuto);
+//
+//        call.enqueue(new Callback<OTPMessageResponse>() {
+//
+//            @Override
+//            public void onResponse(Call<OTPMessageResponse> call, Response<OTPMessageResponse> response) {
+//                Log.e("log", call.request().url().toString());
+//                try {
+//                    if(response.body().getStatus().equals("Success")){
+//                        Intent i=new Intent(context,HomeActivity.class);
+//                        context.startActivity(i);
+//                    }else{
+//                        Log.d("Failure", response.body().getDetails()+"|||"+response.body().getStatus());
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<OTPMessageResponse> call, Throwable t) {
+//                Log.e("ERROR", t.toString());
+//            }
+//
+//        });
+//    }
+    public static String getPostalCodeByCoordinates(Context context, double lat, double lon) throws IOException {
 
-        Log.e("log","Request");
-        RetrofitInterface apiService =
-                APIClient.getClient().create(RetrofitInterface.class);
-        Call<OTPMessageResponse> call = apiService.sentOTP(mobileNumber.getText().toString());
-        call.enqueue(new Callback<OTPMessageResponse>() {
-            @Override
-            public void onResponse(Call<OTPMessageResponse> call, Response<OTPMessageResponse> response) {
-                Log.e("log", call.request().url().toString());
-                sessionId = response.body().getDetails();
-                Log.e("SenderID", sessionId);
-            }
+        Geocoder mGeocoder = new Geocoder(context, Locale.getDefault());
+        String zipcode=null;
+        Address address=null;
 
-            @Override
-            public void onFailure(Call<OTPMessageResponse> call, Throwable t) {
-                Log.e("ERROR", t.toString());
-            }
-        });
-    }
-    public static void validateOTP(String otpAuto, final Context context) {
-        RetrofitInterface apiService =
-                APIClient.getClient().create(RetrofitInterface.class);
+        if (mGeocoder != null) {
 
-        Call<OTPMessageResponse> call = apiService.verifyOTP(sessionId, otpAuto);
+            List<Address> addresses = mGeocoder.getFromLocation(lat, lon, 5);
 
-        call.enqueue(new Callback<OTPMessageResponse>() {
+            if (addresses != null && addresses.size() > 0) {
 
-            @Override
-            public void onResponse(Call<OTPMessageResponse> call, Response<OTPMessageResponse> response) {
-                Log.e("log", call.request().url().toString());
-                try {
-                    if(response.body().getStatus().equals("Success")){
-                        Intent i=new Intent(context,HomeActivity.class);
-                        context.startActivity(i);
-                    }else{
-                        Log.d("Failure", response.body().getDetails()+"|||"+response.body().getStatus());
+                for (int i = 0; i < addresses.size(); i++) {
+                    address = addresses.get(i);
+                    if (address.getPostalCode() != null) {
+                        zipcode = address.getPostalCode();
+                        Log.e("log", "Postal code: " + address.getPostalCode());
+                        break;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+
                 }
+                return zipcode;
             }
+        }
 
-            @Override
-            public void onFailure(Call<OTPMessageResponse> call, Throwable t) {
-                Log.e("ERROR", t.toString());
-            }
-
-        });
+        return null;
+    }
+    public static void makecall(String phone, Context context){
+        String callNumber = phone;
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" +callNumber));
+        context.startActivity(intent);
+    }
+    public static void sendmail(String email, Context context){
+        String emailId = email;
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                "mailto",emailId, null));
+        context.startActivity(Intent.createChooser(intent, "Choose an Email client :"));
     }
 }
