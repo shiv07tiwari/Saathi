@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/LightSkyBlue"
+    android:weightSum="6"
+    tools:context=".Chat">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:layout_alignParentTop="true"
+        android:layout_weight=".5"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnSpeak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:onClick="voiceSend"
+            android:src="@drawable/mic_control" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Tap on mic"
+            android:textColor="@color/White"
+            android:textSize="15dp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_weight="5.5"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/chatArea"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="50dp"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+        <ListView
+            android:layout_marginTop="50dp"
+            android:id="@+id/chatArea1"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/chat"
+            android:layout_width="338dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:ems="10"
+            android:hint="Enter Your Message"
+            android:inputType="textPersonName" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@android:drawable/ic_menu_send"
+            android:onClick="send"
+            android:id="@+id/send"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

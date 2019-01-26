@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.shivansh.krishi_care">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,7 +26,8 @@
             android:windowSoftInputMode="stateAlwaysVisible"
             android:label="@string/title_activity_validate_otp"
             android:parentActivityName=".SignUpActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.shivansh.krishi_care.SignUpActivity" />
@@ -35,6 +37,7 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <service android:name=".SOSService" />
     </application>
 
 </manifest>
