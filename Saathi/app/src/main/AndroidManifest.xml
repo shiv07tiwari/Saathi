@@ -3,8 +3,8 @@
     package="com.example.shivansh.myapplication">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +22,25 @@
         </activity>
         <activity android:name=".ValidateOTPActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".Chat"></activity>
+        <activity android:name=".Chat" />
+        <activity
+            android:name=".NewCaretaker"
+            android:label="@string/title_activity_new_caretaker"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivansh.myapplication.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".CareTaker"
+            android:label="@string/title_activity_care_taker"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivansh.myapplication.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

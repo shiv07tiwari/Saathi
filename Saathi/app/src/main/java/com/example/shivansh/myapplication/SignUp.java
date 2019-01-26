@@ -19,7 +19,18 @@ public class SignUp extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
     private  Boolean valid = true;
     private ImageView upload_image;
-    private SharedPreferences.Editor editor;
+    public static SharedPreferences.Editor editor;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        Boolean islogedin = prefs.getBoolean("is_logedin",false);
+        if(islogedin){
+            Intent myIntent = new Intent(SignUp.this, HomeActivity.class);
+            SignUp.this.startActivity(myIntent);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +98,17 @@ public class SignUp extends AppCompatActivity {
                     }
                 }
                 if(valid) {
-                    Intent myIntent = new Intent(SignUp.this, ValidateOTPActivity.class);
+                    Intent myIntent = new Intent(SignUp.this, HomeActivity.class);
                     SignUp.this.startActivity(myIntent);
                     //Utilities.requestOTP(user_phone);
                     editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putBoolean("is_logedin",true);
                     editor.putString("user_name",user_name.getText().toString());
                     editor.putString("user_phone",user_phone.getText().toString());
                     editor.putString("user_email",user_email.getText().toString());
                     editor.putString("user_password",user_password.getText().toString());
                     editor.apply();
+                    finish();
                 }
             }
         });

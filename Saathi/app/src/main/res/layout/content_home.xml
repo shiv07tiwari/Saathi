@@ -66,121 +66,45 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="6">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recent Caretakers ..."
+            android:text="Your Caretakers"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:textColor="@color/Black"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/Black"/>
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
+            android:scrollbars="vertical"
+            android:layout_margin="8dp"
+            android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:weightSum="3"
-            android:background="@color/White"
-            android:orientation="horizontal">
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:id="@+id/careTaker1"
-                    android:src="@drawable/ic_launcher_background"
-                    app:civ_border_color="#EEEEEE"
-                    android:layout_gravity="center"
-                    app:civ_border_width="1dp"
-                    app:civ_shadow="true"
-                    app:civ_shadow_radius="10"
-                    app:civ_shadow_color="#8BC34A"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Call Doctor"
-                    android:textColor="@color/Black"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:id="@+id/careTaker2"
-                    android:src="@drawable/ic_launcher_background"
-                    app:civ_border_color="#EEEEEE"
-                    android:layout_gravity="center"
-                    app:civ_border_width="1dp"
-                    app:civ_shadow="true"
-                    app:civ_shadow_radius="10"
-                    app:civ_shadow_color="#8BC34A"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Nearest Hospital"
-                    android:textColor="@color/Black"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:id="@+id/careTaker3"
-                    android:src="@drawable/ic_launcher_background"
-                    app:civ_border_color="#EEEEEE"
-                    android:layout_gravity="center"
-                    app:civ_border_width="1dp"
-                    app:civ_shadow="true"
-                    app:civ_shadow_radius="10"
-                    app:civ_shadow_color="#8BC34A"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Alerts"
-                    android:textColor="@color/Black"/>
-            </LinearLayout>
-
-
-
-        </LinearLayout>
+            android:background="@color/White"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/Black"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:weightSum="2">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_weight="1"
             android:weightSum="3"
             android:orientation="horizontal">
        <android.support.v7.widget.CardView
@@ -233,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="ChatBot"/>
+                    android:text="Contact Doctor"/>
 
 
 
@@ -243,6 +167,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_weight="1"
             android:weightSum="3"
             android:orientation="horizontal">
             <android.support.v7.widget.CardView
@@ -257,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="ChatBot"/>
+                    android:text="To-Do List"/>
 
 
 
@@ -275,7 +200,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="ChatBot"/>
+                    android:text="Nearest Hospital"/>
 
 
 
@@ -293,12 +218,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="ChatBot"/>
+                    android:text="Reports"/>
 
 
 
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </LinearLayout>
-
+    </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

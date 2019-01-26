@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".NewCaretaker"
+    tools:showIn="@layout/activity_new_caretaker">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="Enter his/her name : "/>
+            <EditText
+                android:layout_width="100dp"
+                android:id="@+id/care_name"
+                android:layout_height="wrap_content"
+                android:hint="Name"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="Enter his/her phone number : "/>
+            <EditText
+                android:layout_width="100dp"
+                android:id="@+id/care_number"
+                android:inputType="number"
+                android:layout_height="wrap_content"
+                android:hint="Phone"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="Realtionship : "/>
+            <EditText
+                android:layout_width="100dp"
+                android:id="@+id/care_relation"
+                android:layout_height="wrap_content"
+                android:hint="Relation"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="300dp"
+            android:id="@+id/create_new_caretaker"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Create New CareTaker"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

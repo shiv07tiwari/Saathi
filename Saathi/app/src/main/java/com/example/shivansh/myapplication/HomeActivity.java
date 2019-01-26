@@ -1,6 +1,7 @@
 package com.example.shivansh.myapplication;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -30,6 +31,13 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.example.shivansh.myapplication.SignUp.MY_PREFS_NAME;
 
 public class HomeActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -68,6 +76,21 @@ public class HomeActivity extends AppCompatActivity implements
         ImageView user_image = findViewById(R.id.home_image);
         TextView user_name = findViewById(R.id.home_name);
 
+        mRecyclerView = findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        ArrayList<String[]> myDataset = new ArrayList<>();
+        String[] khana = {"Khana"};
+        for(int i=0;i<15;i++) {
+            myDataset.add(khana);
+        }
+        myDataset.add(khana);
+        mAdapter = new MyAdapter(myDataset,HomeActivity.this);
+        mRecyclerView.setAdapter(mAdapter);
+
         CardView sos = findViewById(R.id.SOS_button);
         CardView chatBotStart = findViewById(R.id.chatBotStart);
         chatBotStart.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +105,33 @@ public class HomeActivity extends AppCompatActivity implements
         sos.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                        RetroFit apiService =
+                APIClient.getSOSClient().create(RetroFit.class);
+        Call<SOSResponse> call = apiService.makeSOS();
 
+        call.enqueue(new Callback<SOSResponse>() {
+
+            @Override
+            public void onResponse(Call<SOSResponse> call, Response<SOSResponse> response) {
+                Log.e("log", call.request().url().toString());
+                try {
+                    Log.e("log","Check");
+                    SOSResponse list = response.body();
+                        Log.e("log",list.getName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SOSResponse> call, Throwable t) {
+                Log.e("log", call.request().url().toString());
+                Log.e("ERROR2", t.toString());
+            }
+
+        });
             }
         });
-        //user_image.setImageURI(Uri.parse("//com.android.providers.media.documents/document/image%3A244590"));
     }
 
     @Override
@@ -109,12 +155,21 @@ public class HomeActivity extends AppCompatActivity implements
         return true;
     }
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(id==R.id.action_settings) {
+            SignUp.editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+            SignUp.editor.putBoolean("is_logedin", false);
+            SignUp.editor.apply();
+            Intent myIntent = new Intent(HomeActivity.this, SignUp.class);
+            HomeActivity.this.startActivity(myIntent);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 

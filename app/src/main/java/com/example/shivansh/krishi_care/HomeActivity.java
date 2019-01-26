@@ -97,6 +97,8 @@ public class HomeActivity extends AppCompatActivity implements
         mAdapter = new MyAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
 
+        Intent intent = new Intent(HomeActivity.this,SOSService.class);
+        startService(intent);
 
         ImageView user_image = findViewById(R.id.home_image);
         TextView user_name = findViewById(R.id.home_name);
@@ -107,9 +109,7 @@ public class HomeActivity extends AppCompatActivity implements
         user_phone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                //Utilities.makecall("8989419500",HomeActivity.this);
-                Intent intent = new Intent(HomeActivity.this,SOSService.class);
-                startService(intent);
+                Utilities.makecall("8989419500",HomeActivity.this);
             }
         });
         user_email.setOnClickListener(new View.OnClickListener(){
@@ -134,6 +134,13 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = new Intent(HomeActivity.this,SOSService.class);
+        startService(intent);
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         Log.e(this.getClass().getSimpleName(), "onPause()");
@@ -154,12 +161,21 @@ public class HomeActivity extends AppCompatActivity implements
         return true;
     }
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(id==R.id.action_settings) {
+            SignUpActivity.editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+            SignUpActivity.editor.putBoolean("is_logedin", false);
+            SignUpActivity.editor.apply();
+            Intent myIntent = new Intent(HomeActivity.this, SignUpActivity.class);
+            HomeActivity.this.startActivity(myIntent);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 

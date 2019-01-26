@@ -31,7 +31,7 @@ public class SOSService extends IntentService{
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
 
-        for(int i=0;i<1;i++) {
+        for(int i=0;i<5;i++) {
             RetrofitInterface apiService =
                     APIClient.getClient().create(RetrofitInterface.class);
             Call<SOSResponse> call = apiService.soscheck();
@@ -45,7 +45,7 @@ public class SOSService extends IntentService{
                         //Toast.makeText(SignUpActivity.this,String.valueOf(response.message()),Toast.LENGTH_LONG).show();
                         Log.e("hey",response.message());
                         Log.e("Log", response.body().getName());
-                        if(response.body().getName().equals("false")) {
+                        if(response.body().getName().equals("true")) {
                             Log.e("log","Build Notification");
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 Log.e("log","Channel");
