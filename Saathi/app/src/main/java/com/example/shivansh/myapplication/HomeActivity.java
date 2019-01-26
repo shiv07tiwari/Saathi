@@ -70,11 +70,20 @@ public class HomeActivity extends AppCompatActivity implements
 
         CardView sos = findViewById(R.id.SOS_button);
         CardView chatBotStart = findViewById(R.id.chatBotStart);
+        CardView hosFind = findViewById(R.id.hosFind);
+
         chatBotStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i1 = new Intent(HomeActivity.this,Chat.class);
                 startActivity(i1);
+            }
+        });
+
+        hosFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         user_name.setText("Shivansh Tiwari");

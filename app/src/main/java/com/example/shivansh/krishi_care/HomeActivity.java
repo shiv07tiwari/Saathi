@@ -237,4 +237,18 @@ public class HomeActivity extends AppCompatActivity implements
 
         Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
     }
+
+    public void addTask(View view) {
+        Intent i1 = new Intent(HomeActivity.this,AddTask.class);
+        startActivity(i1);
+    }
+
+    public void callDoc(View view) {
+        String phone = "9045742775";
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        String temp = "tel:" + phone;
+        intent.setData(Uri.parse(temp));
+
+        startActivity(intent);
+    }
 }
