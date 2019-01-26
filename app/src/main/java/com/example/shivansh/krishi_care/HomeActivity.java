@@ -107,7 +107,9 @@ public class HomeActivity extends AppCompatActivity implements
         user_phone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Utilities.makecall("8989419500",HomeActivity.this);
+                //Utilities.makecall("8989419500",HomeActivity.this);
+                Intent intent = new Intent(HomeActivity.this,SOSService.class);
+                startService(intent);
             }
         });
         user_email.setOnClickListener(new View.OnClickListener(){

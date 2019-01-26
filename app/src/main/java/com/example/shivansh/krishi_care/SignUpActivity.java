@@ -33,7 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
         Log.e("log","Welcome");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+//
 //        RetrofitInterface apiService =
 //                APIClient.getClient().create(RetrofitInterface.class);
 //        Call<List<OTPMessageResponse>> call = apiService.check();

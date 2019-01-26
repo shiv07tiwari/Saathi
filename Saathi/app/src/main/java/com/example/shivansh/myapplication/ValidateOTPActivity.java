@@ -21,8 +21,6 @@ public class ValidateOTPActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validate_otp);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         et1 = findViewById(R.id.editText1);
         et2 = findViewById(R.id.editText2);

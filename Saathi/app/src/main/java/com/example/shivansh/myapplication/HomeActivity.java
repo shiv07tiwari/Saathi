@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -48,8 +49,6 @@ public class HomeActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 // The next two lines tell the new client that “this” current class will handle connection stuff
@@ -66,52 +65,26 @@ public class HomeActivity extends AppCompatActivity implements
                 .setFastestInterval(1 * 1000); // 1 second, in milliseconds
         mGoogleApiClient.connect();
 
-
-        mRecyclerView = findViewById(R.id.my_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        ArrayList<String[]> myDataset = new ArrayList<>();
-        String[] khana = {"Khana","Paneer Khana h","High"};
-        for(int i=0;i<15;i++) {
-            myDataset.add(khana);
-        }
-        mAdapter = new MyAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);
-
-
         ImageView user_image = findViewById(R.id.home_image);
         TextView user_name = findViewById(R.id.home_name);
-        ImageView user_phone = findViewById(R.id.phone_call);
-        ImageView user_email = findViewById(R.id.email);
-        ImageView user_location = findViewById(R.id.location);
 
-        user_phone.setOnClickListener(new View.OnClickListener(){
+        CardView sos = findViewById(R.id.SOS_button);
+        CardView chatBotStart = findViewById(R.id.chatBotStart);
+        chatBotStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utilities.makecall("8989419500",HomeActivity.this);
+                Intent i1 = new Intent(HomeActivity.this,Chat.class);
+                startActivity(i1);
             }
         });
-        user_email.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Utilities.sendmail("shivansh16tiwari@gmail.com",HomeActivity.this);
-            }
-        });
-        user_location.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<"+currentLatitude+">,<"+currentLongitude+">" +
-                        "?q=<"+currentLatitude+">,<"+currentLongitude+">(Patient Location)"));
-
-                if (intent.resolveActivity(getPackageManager()) != null)
-                    startActivity(intent);
-            }
-        });
-
         user_name.setText("Shivansh Tiwari");
+
+        sos.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         //user_image.setImageURI(Uri.parse("//com.android.providers.media.documents/document/image%3A244590"));
     }
 
