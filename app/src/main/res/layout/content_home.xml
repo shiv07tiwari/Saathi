@@ -110,6 +110,7 @@
                         android:layout_height="40dp"
                         android:layout_alignParentBottom="true"
                         android:layout_gravity="center"
+                        android:onClick="callDoc"
                         android:src="@drawable/expert_1346618"
                         android:layout_margin="8dp"
                         />
@@ -195,6 +196,16 @@
 
 
         </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:onClick="addTask"
+        android:src="@drawable/ic_add_circle_outline_black_24dp"
+        />
 
 
 

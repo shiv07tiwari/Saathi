@@ -40,6 +40,8 @@ import ai.api.model.AIError;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
 
+import static ai.api.util.StringUtils.isEmpty;
+
 public class Chat extends AppCompatActivity implements AIListener{
     private EditText chat;
     private ImageButton send;
@@ -86,6 +88,8 @@ public class Chat extends AppCompatActivity implements AIListener{
                 arrayList.add(s);
                 chat.setText("");
                 adapter.notifyDataSetChanged();
+                RetrieveFeedTask task=new RetrieveFeedTask();
+                task.execute(s);
             }
         });
 
@@ -213,7 +217,7 @@ public class Chat extends AppCompatActivity implements AIListener{
 
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String userQuery=result.get(0);
-                    if(result.get(0).compareTo("") == 0){
+                    if(isEmpty(result.get(0))){
                         userQuery = chat.getText().toString();
                     }
                     arrayList.add(userQuery);

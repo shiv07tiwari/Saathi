@@ -93,6 +93,7 @@ public class HomeActivity extends AppCompatActivity implements
 
         CardView sos = findViewById(R.id.SOS_button);
         CardView chatBotStart = findViewById(R.id.chatBotStart);
+
         chatBotStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +101,7 @@ public class HomeActivity extends AppCompatActivity implements
                 startActivity(i1);
             }
         });
+
         user_name.setText("Shivansh Tiwari");
 
         sos.setOnClickListener(new View.OnClickListener(){

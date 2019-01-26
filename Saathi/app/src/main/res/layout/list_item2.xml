@@ -9,7 +9,7 @@
         android:text=""
         android:id="@+id/text12"
         android:padding="8dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/round_corner"
         android:layout_alignParentRight="true"/>
