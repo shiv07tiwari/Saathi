@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="str_aadhar_number">Aadhar Number</string>
+    <string name="str_upload_your_image">Upload Your Image</string>
+    <string name="src_your_name">Your Name</string>
+    <string name="str_contact_number">Contact Number</string>
+    <string name="str_email_address">Email Address</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="passsword">Passsword</string>
+    <string name="title_activity_validate_otp">ValidateOTPActivity</string>
+    <string name="verify_mobile_number">Verify Your Mobile Number</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="predict_a_disease">Predict a Disease</string>
+</resources>

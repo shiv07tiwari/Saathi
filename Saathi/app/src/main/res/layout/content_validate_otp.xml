@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@color/White"
+                android:gravity="center"
+                android:text="@string/verify_mobile_number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:textColor="@color/White"
+                android:text="Please enter the Verification Code Send to your Mobile Number"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <android.support.v7.widget.CardView
+                android:layout_width="80dp"
+                android:layout_margin="10dp"
+                android:layout_height="80dp">
+                <EditText
+                    android:layout_width="80dp"
+                    android:id="@+id/editText1"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textSize="40sp"
+                    android:hint="1"
+                    android:layout_height="80dp" />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="80dp"
+                android:layout_margin="10dp"
+                android:layout_height="80dp">
+                <EditText
+                    android:layout_width="80dp"
+                    android:id="@+id/editText2"
+                    android:inputType="number"
+                    android:textSize="40sp"
+                    android:hint="1"
+                    android:textAlignment="center"
+                    android:layout_height="80dp" />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="80dp"
+                android:layout_margin="10dp"
+                android:layout_height="80dp">
+                <EditText
+                    android:layout_width="80dp"
+                    android:id="@+id/editText3"
+                    android:inputType="number"
+                    android:textSize="40sp"
+                    android:hint="1"
+                    android:textAlignment="center"
+                    android:layout_height="80dp" />
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="40sp"
+            android:hint="1"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <android.support.v7.widget.CardView
+                android:layout_width="80dp"
+                android:layout_margin="10dp"
+                android:layout_height="80dp">
+                <EditText
+                    android:layout_width="80dp"
+                    android:id="@+id/editText4"
+                    android:inputType="number"
+                    android:textSize="40sp"
+                    android:hint="1"
+                    android:textAlignment="center"
+                    android:layout_height="80dp" />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="80dp"
+                android:layout_margin="10dp"
+                android:layout_height="80dp">
+                <EditText
+                    android:layout_width="80dp"
+                    android:id="@+id/editText5"
+                    android:inputType="number"
+                    android:textSize="40sp"
+                    android:hint="1"
+                    android:textAlignment="center"
+                    android:layout_height="80dp" />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="80dp"
+                android:layout_margin="10dp"
+                android:layout_height="80dp">
+                <EditText
+                    android:layout_width="80dp"
+                    android:id="@+id/editText6"
+                    android:inputType="number"
+                    android:textSize="40sp"
+                    android:hint="1"
+                    android:textAlignment="center"
+                    android:layout_height="80dp" />
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
