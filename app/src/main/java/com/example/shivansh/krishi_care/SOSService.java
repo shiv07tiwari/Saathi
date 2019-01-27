@@ -67,7 +67,7 @@ public class SOSService extends IntentService{
                                     .setLargeIcon(icon)
                                     .setColor(mContext.getResources().getColor(R.color.colorPrimary))
                                     .setContentTitle("SOS Message")
-                                    .setContentText("Hello this is a SOS notification")
+                                    .setContentText("Patient has send a SOS. He might be in trouble !!")
                                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                     .setDefaults(Notification.DEFAULT_SOUND)
                                     .setAutoCancel(true);

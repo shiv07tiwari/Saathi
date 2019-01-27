@@ -51,7 +51,7 @@ import retrofit2.Response;
 
 import static ai.api.util.StringUtils.isEmpty;
 
-public class Chat extends AppCompatActivity implements AIListener{
+public class Chat extends AppCompatActivity implements AIListener,TextToSpeech.OnInitListener{
     private EditText chat;
     private ImageButton send;
     private ListView chatArea,chatArea2;
@@ -63,6 +63,7 @@ public class Chat extends AppCompatActivity implements AIListener{
     private final int REQ_CODE_SPEECH_INPUT = 100;
     TextToSpeech t1;
     ImageButton btnSpeak;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class Chat extends AppCompatActivity implements AIListener{
         chatArea = (ListView)findViewById(R.id.chatArea);
         chatArea2 = (ListView)findViewById(R.id.chatArea1);
         btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
+        tts = new TextToSpeech(this, this);
 
         arrayListRecieve = new ArrayList<String>();
         arrayList = new ArrayList<String>();
@@ -346,6 +348,33 @@ public class Chat extends AppCompatActivity implements AIListener{
         aiService.startListening();
     }
 
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+
+            int result = tts.setLanguage(Locale.US);
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            } else {
+
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+
+
+    }
+
+    private void speakOut(String s) {
+
+
+
+        tts.speak(s, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
 
     class RetrieveFeedTask extends AsyncTask<String, Void, String> {
 
@@ -372,6 +401,7 @@ public class Chat extends AppCompatActivity implements AIListener{
             arrayListRecieve.add(s);
 
             adapterRec.notifyDataSetChanged();
+            speakOut(s);
 
         }}
 

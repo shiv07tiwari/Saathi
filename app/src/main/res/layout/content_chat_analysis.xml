@@ -7,9 +7,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ChatAnalysis"
     tools:showIn="@layout/activity_chat_analysis">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/linear_layout"
+        android:visibility="gone"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
@@ -33,16 +39,14 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginLeft="20dp" />
             <ProgressBar
-                android:id="@+id/ProgressBar"
+                android:id="@+id/ProgressBarShow"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="200dp"
                 android:layout_marginTop="50dp"
                 android:layout_height="15dp"
                 android:background="@color/Black"
-                android:indeterminate="true"
                 android:maxHeight="30dip"
-                android:minHeight="30dip"
-                android:progress="50" />
+                android:minHeight="30dip" />
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"

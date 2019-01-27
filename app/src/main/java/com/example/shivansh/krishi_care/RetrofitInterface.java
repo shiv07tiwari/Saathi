@@ -22,5 +22,8 @@ public interface RetrofitInterface {
     @GET("/getTODO")
     Call<List<ToDoBody>> getAllToDo();
 
+    @GET("gsfn")
+    Call<SOSResponse> getSentiment();
+
 
 }

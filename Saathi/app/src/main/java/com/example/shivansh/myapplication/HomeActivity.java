@@ -128,6 +128,7 @@ public class HomeActivity extends AppCompatActivity implements
         mGoogleApiClient.connect();
 
         ImageView user_image = findViewById(R.id.home_image);
+        user_image.setImageResource(R.drawable.old);
         TextView user_name = findViewById(R.id.home_name);
 
         CardView sos = findViewById(R.id.SOS_button);
