@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private ArrayList<String[]> mDataset;
+    private ArrayList<String> mDataset;
     private Context mContext;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -28,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    public MyAdapter(ArrayList<String[]> myDataset, Context context) {
+    public MyAdapter(ArrayList<String> myDataset, Context context) {
         mDataset = myDataset;
         mContext=context;
     }
@@ -48,8 +48,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             holder.mPicture.setImageResource(R.drawable.ic_add_circle_black_24dp);
             holder.mName.setText("Add More");
         } else{
-            holder.mName.setText(mDataset.get(position)[0]);
-            holder.mPicture.setImageResource(R.drawable.chatbot);
+            holder.mName.setText(mDataset.get(position));
+            holder.mPicture.setImageResource(R.drawable.expert_1346618);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +73,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        if(mDataset!=null)
+            return mDataset.size();
+        else
+            return 0;
     }
 }

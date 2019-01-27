@@ -65,17 +65,17 @@ public class NewCaretaker extends AppCompatActivity {
                 RetroFit apiService =
                 APIClient.getSOSClient().create(RetroFit.class);
         Log.e("log",fName);
-        Call<AddCaretakerBody> call = apiService.addCaretaker(fName,fContact,fRelation);
+        Call<SOSResponse> call = apiService.addCaretaker(fName,fContact,fRelation);
 
-        call.enqueue(new Callback<AddCaretakerBody>() {
+        call.enqueue(new Callback<SOSResponse>() {
 
             @Override
-            public void onResponse(Call<AddCaretakerBody> call, Response<AddCaretakerBody> response) {
+            public void onResponse(Call<SOSResponse> call, Response<SOSResponse> response) {
                 Log.e("log", call.request().url().toString());
                 try {
                     //Toast.makeText(SignUp.this,String.valueOf(response.message()),Toast.LENGTH_LONG).show();
                    // Log.e("Log", String.valueOf(response.body()));
-                    AddCaretakerBody list = response.body();
+                    SOSResponse list = response.body();
                     Log.e("log", String.valueOf(response.message()));
                     Log.e("log",list.getName());
                 } catch (Exception e) {
@@ -84,12 +84,12 @@ public class NewCaretaker extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<AddCaretakerBody> call, Throwable t) {
+            public void onFailure(Call<SOSResponse> call, Throwable t) {
                 Log.e("log", call.request().url().toString());
                 Log.e("ERROR2", t.toString());
             }
-
         });
+        finish();
         }
         });
     }

@@ -11,4 +11,5 @@
     <string name="verify_mobile_number">Verify Your Mobile Number</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="predict_a_disease">Predict a Disease</string>
+    <string name="title_activity_chat_analysis">ChatAnalysis</string>
 </resources>

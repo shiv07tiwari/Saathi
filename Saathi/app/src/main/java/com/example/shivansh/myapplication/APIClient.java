@@ -7,7 +7,7 @@ public class APIClient {
 
 
     public static  final String API = "dbc30b65-1fc6-11e9-9ee8-0200cd936042";
-    public static final String BASE_URL1 = "https://a2841cac.ngrok.io/";
+    public static final String BASE_URL1 = "https://27e1f295.ngrok.io/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getSOSClient() {

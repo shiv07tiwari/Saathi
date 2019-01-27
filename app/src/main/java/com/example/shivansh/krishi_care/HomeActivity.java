@@ -25,6 +25,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static com.example.shivansh.krishi_care.SignUpActivity.MY_PREFS_NAME;
 
 public class HomeActivity extends AppCompatActivity implements
@@ -55,10 +61,57 @@ public class HomeActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private double currentLatitude;
+    private boolean sos = false;
     private double currentLongitude;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+    private static ArrayList<ToDoBody> myDataset;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("log","On Start");
+        RetrofitInterface apiService =
+                APIClient.getClient().create(RetrofitInterface.class);
+        Call<List<ToDoBody>> call = apiService.getAllToDo();
+
+        call.enqueue(new Callback<List<ToDoBody>>() {
+
+            @Override
+            public void onResponse(Call<List<ToDoBody>> call, Response<List<ToDoBody>> response) {
+                Log.e("log", call.request().url().toString());
+                mRecyclerView.setVisibility(View.VISIBLE);
+                ProgressBar bar = findViewById(R.id.progress);
+                bar.setVisibility(View.GONE);
+
+                myDataset = new ArrayList<>();
+                try {
+                    //Toast.makeText(SignUp.this,String.valueOf(response.message()),Toast.LENGTH_LONG).show();
+                    Log.e("Log", String.valueOf(response.body()));
+                    sos=true;
+                    List<ToDoBody> list = response.body();
+                    Log.e("size", String.valueOf(list.size()));
+                    for (ToDoBody l: list) {
+                        myDataset.add(l);
+                        Log.e("logvhfhfj",l.getName());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mAdapter = new MyAdapter(myDataset);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ToDoBody>> call, Throwable t) {
+                Log.e("log", call.request().url().toString());
+                Log.e("ERROR2", t.toString());
+            }
+
+        });
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,23 +142,28 @@ public class HomeActivity extends AppCompatActivity implements
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ArrayList<String[]> myDataset = new ArrayList<>();
-        String[] khana = {"Khana","Paneer Khana h","High"};
-        for(int i=0;i<15;i++) {
-            myDataset.add(khana);
-        }
-        mAdapter = new MyAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);
 
-        Intent intent = new Intent(HomeActivity.this,SOSService.class);
-        startService(intent);
+        if(sos) {
+            Intent intent = new Intent(HomeActivity.this,SOSService.class);
+            startService(intent);
+        }
 
         ImageView user_image = findViewById(R.id.home_image);
         TextView user_name = findViewById(R.id.home_name);
         ImageView user_phone = findViewById(R.id.phone_call);
         ImageView user_email = findViewById(R.id.email);
         ImageView user_location = findViewById(R.id.location);
+        user_image.setImageResource(R.drawable.old);
 
+        LinearLayout summary = findViewById(R.id.chat_summary);
+        summary.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Log.e("log","CLick");
+                Intent intent = new Intent(HomeActivity.this,ChatAnalysis.class);
+                startActivity(intent);
+            }
+        });
         user_phone.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -205,7 +263,7 @@ public class HomeActivity extends AppCompatActivity implements
             currentLatitude = location.getLatitude();
             currentLongitude = location.getLongitude();
             Log.e("log", String.valueOf(currentLatitude+currentLongitude));
-            Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -251,12 +309,13 @@ public class HomeActivity extends AppCompatActivity implements
         currentLatitude = location.getLatitude();
         currentLongitude = location.getLongitude();
 
-        Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
     }
 
     public void addTask(View view) {
         Intent i1 = new Intent(HomeActivity.this,AddTask.class);
         startActivity(i1);
+        finish();
     }
 
     public void callDoc(View view) {

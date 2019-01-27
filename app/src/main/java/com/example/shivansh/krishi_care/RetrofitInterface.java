@@ -15,4 +15,12 @@ public interface RetrofitInterface {
 
     @GET("home")
     Call<SOSResponse> soscheck();
+
+    @GET("/todo/{name}/{description}/{time}/{date}")
+    Call<SOSResponse> addTodoTask(@Path("name") String name,@Path("description") String description,@Path("time") String time, @Path("date") String date);
+
+    @GET("/getTODO")
+    Call<List<ToDoBody>> getAllToDo();
+
+
 }

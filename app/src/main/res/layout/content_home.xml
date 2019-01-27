@@ -151,6 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:id="@+id/chat_summary"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -159,7 +160,7 @@
                         android:layout_height="40dp"
                         android:layout_alignParentBottom="true"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_add_alert_black_24dp"
+                        android:src="@drawable/ic_message_black_24dp"
                         android:layout_margin="8dp"
                         />
 
@@ -167,8 +168,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Alerts"
-                        android:textColor="@color/Black"/>
+                        android:layout_marginStart="20dp"
+                        android:text="Last Chat Analysis"
+                        android:textColor="@color/Black"
+                        android:layout_marginLeft="20dp" />
                 </LinearLayout>
 
 
@@ -176,7 +179,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today's Tasks..."
+                android:text="Patient's Task"
                 android:background="@color/White"
                 android:textColor="@color/Black"
                 android:layout_margin="8dp"
@@ -186,6 +189,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/Black"/>
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:id="@+id/progress"
+                android:layout_height="wrap_content" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/my_recycler_view"
                 android:scrollbars="vertical"

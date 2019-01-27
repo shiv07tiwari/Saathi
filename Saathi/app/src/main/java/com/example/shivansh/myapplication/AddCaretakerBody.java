@@ -1,10 +1,18 @@
 package com.example.shivansh.myapplication;
 
-public class AddCaretakerBody {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-   private String name;
-   private String contact;
-   private String relation;
+public class AddCaretakerBody {
+    @SerializedName("Name")
+    @Expose
+    private String name;
+    @SerializedName("Phone")
+    @Expose
+    private String contact;
+    @SerializedName("Relation")
+    @Expose
+    private String relation;
 
     public AddCaretakerBody(String name, String phone, String relation) {
         this.name = name;

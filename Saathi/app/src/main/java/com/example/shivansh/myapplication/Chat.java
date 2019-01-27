@@ -19,7 +19,11 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -29,7 +33,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import ai.api.AIDataService;
 import ai.api.AIListener;
@@ -39,6 +45,9 @@ import ai.api.android.AIService;
 import ai.api.model.AIError;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static ai.api.util.StringUtils.isEmpty;
 
@@ -365,4 +374,59 @@ public class Chat extends AppCompatActivity implements AIListener{
             adapterRec.notifyDataSetChanged();
 
         }}
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("log", "Stop");
+        super.onPause();
+        RetroFit apiService =
+                APIClient.getSOSClient().create(RetroFit.class);
+        Map<String, String> netmap = new HashMap<>();
+
+        int i = 0;
+        for (int j = 0; j < arrayList.size(); j++) {
+            netmap.put(String.valueOf(j), arrayList.get(j));
+        }
+        Call<SOSResponse> call = apiService.getLandingPageReport(netmap);
+        call.enqueue(new Callback<SOSResponse>() {
+
+            @Override
+            public void onResponse(Call<SOSResponse> call, Response<SOSResponse> response) {
+                Log.e("log", call.request().url().toString());
+                try {
+                    Log.e("log","Check");
+                    SOSResponse list = response.body();
+                    Log.e("log",list.getName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SOSResponse> call, Throwable t) {
+                Log.e("log", call.request().url().toString());
+                Log.e("ERROR2", t.toString());
+            }
+
+        });
+    }
+    private static JsonObject generateRegistrationRequest() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            JSONObject subJsonObject = new JSONObject();
+            subJsonObject.put("email", "abc@xyz.com");
+            subJsonObject.put("firstname", "abc");
+            subJsonObject.put("lastname", "xyz");
+
+            jsonObject.put("customer", subJsonObject);
+            jsonObject.put("password", "password");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonParser jsonParser = new JsonParser();
+        JsonObject gsonObject = (JsonObject) jsonParser.parse(jsonObject.toString());
+        return gsonObject;
+    }
 }

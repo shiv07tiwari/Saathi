@@ -29,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
         if(islogedin){
             Intent myIntent = new Intent(SignUpActivity.this, HomeActivity.class);
             SignUpActivity.this.startActivity(myIntent);
+            finish();
         }
     }
 

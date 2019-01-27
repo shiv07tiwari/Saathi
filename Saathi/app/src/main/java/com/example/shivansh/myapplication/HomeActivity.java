@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import com.google.android.gms.location.LocationServices;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,6 +54,51 @@ public class HomeActivity extends AppCompatActivity implements
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<String> myDataset;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("log","On Start");
+        RetroFit apiService =
+                APIClient.getSOSClient().create(RetroFit.class);
+        Call<List<AddCaretakerBody>> call = apiService.getAllCaretaker();
+        call.enqueue(new Callback<List<AddCaretakerBody>>() {
+
+            @Override
+            public void onResponse(Call<List<AddCaretakerBody>> call, Response<List<AddCaretakerBody>> response) {
+                Log.e("log", call.request().url().toString());
+                mRecyclerView.setVisibility(View.VISIBLE);
+                ProgressBar bar = findViewById(R.id.progress);
+                bar.setVisibility(View.GONE);
+
+                myDataset = new ArrayList<>();
+                try {
+                    //Toast.makeText(SignUp.this,String.valueOf(response.message()),Toast.LENGTH_LONG).show();
+                    Log.e("Log", String.valueOf(response.body()));
+                    List<AddCaretakerBody> list = response.body();
+                    Log.e("size", String.valueOf(list.size()));
+                    for (AddCaretakerBody l: list
+                         ) {
+                        myDataset.add(l.getName());
+                        Log.e("log",l.getName());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                myDataset.add("Test");
+                mAdapter = new MyAdapter(myDataset,HomeActivity.this);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<AddCaretakerBody>> call, Throwable t) {
+                Log.e("log", call.request().url().toString());
+                Log.e("ERROR2", t.toString());
+            }
+
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +114,13 @@ public class HomeActivity extends AppCompatActivity implements
                 .build();
 
         // Create the LocationRequest object
+        mRecyclerView = findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setVisibility(View.GONE);
+        ProgressBar bar = findViewById(R.id.progress);
+        bar.setVisibility(View.VISIBLE);
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
@@ -76,23 +130,24 @@ public class HomeActivity extends AppCompatActivity implements
         ImageView user_image = findViewById(R.id.home_image);
         TextView user_name = findViewById(R.id.home_name);
 
-        mRecyclerView = findViewById(R.id.my_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        ArrayList<String[]> myDataset = new ArrayList<>();
-        String[] khana = {"Khana"};
-        for(int i=0;i<15;i++) {
-            myDataset.add(khana);
-        }
-        myDataset.add(khana);
-        mAdapter = new MyAdapter(myDataset,HomeActivity.this);
-        mRecyclerView.setAdapter(mAdapter);
-
         CardView sos = findViewById(R.id.SOS_button);
         CardView chatBotStart = findViewById(R.id.chatBotStart);
+        CardView contactDoctor = findViewById(R.id.contactDoc);
+        CardView todo = findViewById(R.id.todo_button);
+
+        todo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i1 = new Intent(HomeActivity.this,ToDoActivity.class);
+                startActivity(i1);
+            }
+        });
+        contactDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utilities.makecall("8989419500",HomeActivity.this);
+            }
+        });
 
         chatBotStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +256,7 @@ public class HomeActivity extends AppCompatActivity implements
             currentLatitude = location.getLatitude();
             currentLongitude = location.getLongitude();
             Log.e("log", String.valueOf(currentLatitude+currentLongitude));
-            Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -247,6 +302,6 @@ public class HomeActivity extends AppCompatActivity implements
         currentLatitude = location.getLatitude();
         currentLongitude = location.getLongitude();
 
-        Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
     }
 }

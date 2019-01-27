@@ -2,6 +2,7 @@ package com.example.shivansh.myapplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -9,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -31,5 +33,18 @@ public interface RetroFit {
 
 
     @GET("/care/{name}/{contact}/{relation}")
-    Call<AddCaretakerBody> addCaretaker(@Path("name") String name, @Path("contact") String contact,@ Path("relation") String relation);
+    Call<SOSResponse> addCaretaker(@Path("name") String name, @Path("contact") String contact,@ Path("relation") String relation);
+
+    @GET("/getcare")
+    Call<List<AddCaretakerBody>> getAllCaretaker();
+
+    @GET("/todo/{name}/{description}/{time}/{date}")
+    Call<SOSResponse> addTodoTask(@Path("name") String name,@Path("description") String description,@Path("time") String time, @Path("date") String date);
+
+    @GET("/getTODO")
+    Call<List<ToDoBody>> getAllToDo();
+
+    @FormUrlEncoded
+    @POST("/senti")
+    Call<SOSResponse>getLandingPageReport(@FieldMap Map<String, String> learning_objective_uuids);
 }
